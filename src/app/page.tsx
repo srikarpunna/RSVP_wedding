@@ -66,12 +66,10 @@ export default function Home() {
           {/* S ♥ P monogram between the flowers */}
           <div className="absolute -top-32 left-0 right-0 flex items-center justify-center gap-3 z-20">
             <div className="w-16 h-px bg-gradient-to-r from-transparent to-[#C9A84C]"/>
-            <div className="flex items-center gap-2">
-              <span className="font-serif text-3xl text-[#C9A84C] italic drop-shadow-sm">S</span>
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
-                <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 3.322 2 5.5 2c1.699 0 3.296.92 4.5 2.38C11.204 2.92 12.801 2 14.5 2 16.678 2 19 3.604 19 7.191c0 4.105-5.37 8.863-11 14.402z" fill="#7F1D1D"/>
-              </svg>
-              <span className="font-serif text-3xl text-[#C9A84C] italic drop-shadow-sm">P</span>
+            <div className="grid w-36 grid-cols-3 items-center">
+              <span className="font-serif text-3xl text-[#C9A84C] italic drop-shadow-sm text-center">S</span>
+              <span className="text-3xl leading-none text-[#7F1D1D] drop-shadow-sm text-center">♥</span>
+              <span className="font-serif text-3xl text-[#C9A84C] italic drop-shadow-sm text-center">P</span>
             </div>
             <div className="w-16 h-px bg-gradient-to-l from-transparent to-[#C9A84C]"/>
           </div>
