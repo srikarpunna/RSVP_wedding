@@ -8,8 +8,11 @@
   }
 
   body {
-    @apply bg-white text-[#2c1810] antialiased;
+    @apply text-[#2c1810] antialiased;
     font-family: var(--font-lato), sans-serif;
+    background: linear-gradient(170deg, #c9e8f7 0%, #e8d5f5 30%, #fde8c8 65%, #fbd5c0 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4 {

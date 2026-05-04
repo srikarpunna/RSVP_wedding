@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${playfair.variable} ${lato.variable} font-sans bg-pattern-mandala`}>
+      <body className={`${playfair.variable} ${lato.variable} font-sans`}>
         {children}
       </body>
     </html>

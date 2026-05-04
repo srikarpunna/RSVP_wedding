@@ -27,7 +27,7 @@ function GoldDivider() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-[#2c1810]">
+    <main className="min-h-screen text-[#2c1810]">
 
       {/* Gold border — top */}
       <div className="w-full leading-none">
@@ -42,21 +42,41 @@ export default function Home() {
       </div>
 
       {/* ─── HERO ─── */}
-      <section className="relative pt-0 pb-16 md:pb-24 px-6 text-center bg-white">
+      <section className="relative pt-4 pb-16 md:pb-24 px-6 text-center">
+
+        {/* Decorative corner florals — pinned to viewport edges, won't clip content */}
+        <div className="pointer-events-none select-none">
+          <svg className="fixed top-24 left-2 opacity-20 w-28 h-28" viewBox="0 0 200 200">
+            {[0,45,90,135,180,225,270,315].map((deg,i) => (
+              <ellipse key={i} cx="100" cy="62" rx="10" ry="22" fill="#C9A84C"
+                transform={`rotate(${deg} 100 100)`}/>
+            ))}
+            <circle cx="100" cy="100" r="11" fill="#fdf3ec"/>
+          </svg>
+          <svg className="fixed top-24 right-2 opacity-20 w-28 h-28" viewBox="0 0 200 200">
+            {[0,60,120,180,240,300].map((deg,i) => (
+              <ellipse key={i} cx="100" cy="58" rx="11" ry="26" fill="#C9A84C"
+                transform={`rotate(${deg} 100 100)`}/>
+            ))}
+            <circle cx="100" cy="100" r="13" fill="#fdf3ec"/>
+          </svg>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" as const }}
-          className="max-w-3xl mx-auto"
+          className="max-w-3xl mx-auto relative z-10"
         >
-          {/* Ganesha — no background box */}
-          <div className="flex justify-center mb-2 -mt-6">
+          {/* Ganesha */}
+          <div className="flex justify-center mb-2">
             <Image
               src="/ganesha.png"
               alt="Sri Ganesha"
-              width={320}
-              height={320}
+              width={360}
+              height={360}
               className="object-contain"
+              style={{ mixBlendMode: "multiply" }}
               priority
             />
           </div>
@@ -65,8 +85,8 @@ export default function Home() {
           <p className="text-[#C9A84C] text-xl md:text-2xl mb-1 font-serif italic">శ్రీ గణేశాయ నమః</p>
           <p className="text-[#8a6a60] text-sm tracking-widest mb-10">Sri Ganeshaya Namaha</p>
 
-          <p className="tracking-[0.3em] text-[#C9A84C] text-sm uppercase mb-4 font-medium">
-            Together with their families
+          <p className="tracking-[0.15em] text-[#C9A84C] text-sm uppercase mb-4 font-medium max-w-lg mx-auto leading-relaxed">
+            Together with your families we invite you to our wedding
           </p>
 
           <h1 className="font-serif text-7xl md:text-9xl text-[#7F1D1D] leading-none mb-3">
@@ -104,7 +124,7 @@ export default function Home() {
       <GoldDivider />
 
       {/* ─── CEREMONIES ─── */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6">
         <motion.div {...fadeUp} className="text-center mb-16 max-w-2xl mx-auto">
           <p className="tracking-[0.3em] text-[#C9A84C] text-sm uppercase mb-2">May 7–10, 2026</p>
           <h2 className="font-serif text-5xl md:text-6xl text-[#7F1D1D] mb-4">The Celebrations</h2>
@@ -135,7 +155,7 @@ export default function Home() {
               </div>
 
               {/* Content */}
-              <div className={`flex flex-col justify-center p-10 md:p-16 bg-white ${idx % 2 === 0 ? "" : "md:[direction:ltr]"}`}>
+              <div className={`flex flex-col justify-center p-10 md:p-16 bg-white/60 backdrop-blur-sm ${idx % 2 === 0 ? "" : "md:[direction:ltr]"}`}>
                 <p className="text-[#C9A84C] text-sm tracking-[0.3em] uppercase mb-3">{event.date}</p>
                 <h3 className="font-serif text-4xl md:text-5xl text-[#7F1D1D] mb-1">{event.name}</h3>
 
@@ -192,7 +212,7 @@ export default function Home() {
       </div>
 
       {/* ─── FOOTER ─── */}
-      <footer className="bg-white py-14 text-center">
+      <footer className="py-14 text-center">
         <p className="font-serif text-4xl text-[#7F1D1D] mb-4">Prathyusha &amp; Sujit</p>
         <p className="text-sm tracking-widest uppercase text-[#8a6a60]">May 7 – 10, 2026 · Texas</p>
       </footer>
