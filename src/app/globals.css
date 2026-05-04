@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply m-0 p-0;
+  }
+
+  body {
+    @apply bg-white text-[#2c1810] antialiased;
+    font-family: var(--font-lato), sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-playfair), serif;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply border border-[#C9A84C] text-[#7F1D1D] hover:bg-[#7F1D1D] hover:text-white transition-all px-10 py-3.5 text-sm tracking-[0.2em] uppercase font-medium inline-flex items-center gap-2;
+  }
+
+  .label-gold {
+    @apply text-xs tracking-[0.25em] uppercase text-[#C9A84C] font-medium;
+  }
+}
