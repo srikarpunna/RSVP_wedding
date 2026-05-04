@@ -19,25 +19,19 @@ export async function POST(req: Request) {
       excitement,
     } = body;
 
-    // We only proceed if Google Sheets is configured, otherwise simulate success for testing
-    if (!process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY || !process.env.GOOGLE_SHEET_ID) {
-      console.warn("Google Sheets credentials are not fully configured. Simulating successful RSVP for testing.");
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.GOOGLE_SHEET_ID) {
+      console.warn("Google Sheets credentials are not configured.");
       return NextResponse.json({ success: true, simulated: true });
     }
 
-    // Vercel sometimes stores the key with literal \n or with actual newlines — handle both
-    const privateKey = process.env.GOOGLE_PRIVATE_KEY.includes("\\n")
-      ? process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n")
-      : process.env.GOOGLE_PRIVATE_KEY;
+    const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
 
     const auth = new google.auth.GoogleAuth({
       credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: privateKey,
+        client_email: serviceAccount.client_email,
+        private_key: serviceAccount.private_key,
       },
       scopes: [
-        "https://www.googleapis.com/auth/drive",
-        "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/spreadsheets",
       ],
     });
