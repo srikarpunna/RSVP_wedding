@@ -25,10 +25,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, simulated: true });
     }
 
+    // Vercel sometimes stores the key with literal \n or with actual newlines — handle both
+    const privateKey = process.env.GOOGLE_PRIVATE_KEY.includes("\\n")
+      ? process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n")
+      : process.env.GOOGLE_PRIVATE_KEY;
+
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+        private_key: privateKey,
       },
       scopes: [
         "https://www.googleapis.com/auth/drive",
@@ -69,6 +74,8 @@ export async function POST(req: Request) {
   } catch (error: unknown) {
     console.error("RSVP Submission Error:", error);
     const errorMessage = error instanceof Error ? error.message : "Failed to submit RSVP";
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
+    const errorDetails = error instanceof Error ? error.stack : String(error);
+    console.error("Full error details:", errorDetails);
+    return NextResponse.json({ error: errorMessage, details: errorDetails }, { status: 500 });
   }
 }
