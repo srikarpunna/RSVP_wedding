@@ -44,22 +44,75 @@ export default function Home() {
       {/* ─── HERO ─── */}
       <section className="relative pt-4 pb-16 md:pb-24 px-6 text-center">
 
-        {/* Decorative corner florals — pinned to viewport edges, won't clip content */}
+        {/* Decorative florals + scattered hearts */}
         <div className="pointer-events-none select-none">
-          <svg className="fixed top-24 left-2 opacity-20 w-28 h-28" viewBox="0 0 200 200">
+          {/* Left flower */}
+          <svg className="fixed top-24 left-2 opacity-25 w-28 h-28" viewBox="0 0 200 200">
             {[0,45,90,135,180,225,270,315].map((deg,i) => (
               <ellipse key={i} cx="100" cy="62" rx="10" ry="22" fill="#C9A84C"
                 transform={`rotate(${deg} 100 100)`}/>
             ))}
             <circle cx="100" cy="100" r="11" fill="#fdf3ec"/>
           </svg>
-          <svg className="fixed top-24 right-2 opacity-20 w-28 h-28" viewBox="0 0 200 200">
+          {/* Right flower */}
+          <svg className="fixed top-24 right-2 opacity-25 w-28 h-28" viewBox="0 0 200 200">
             {[0,60,120,180,240,300].map((deg,i) => (
               <ellipse key={i} cx="100" cy="58" rx="11" ry="26" fill="#C9A84C"
                 transform={`rotate(${deg} 100 100)`}/>
             ))}
             <circle cx="100" cy="100" r="13" fill="#fdf3ec"/>
           </svg>
+
+          {/* S ♥ P monogram between the flowers */}
+          <div className="absolute -top-32 left-0 right-0 flex items-center justify-center gap-3 z-20">
+            <div className="w-16 h-px bg-gradient-to-r from-transparent to-[#C9A84C]"/>
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-3xl text-[#C9A84C] italic drop-shadow-sm">S</span>
+              <svg className="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 3.322 2 5.5 2c1.699 0 3.296.92 4.5 2.38C11.204 2.92 12.801 2 14.5 2 16.678 2 19 3.604 19 7.191c0 4.105-5.37 8.863-11 14.402z" fill="#7F1D1D"/>
+              </svg>
+              <span className="font-serif text-3xl text-[#C9A84C] italic drop-shadow-sm">P</span>
+            </div>
+            <div className="w-16 h-px bg-gradient-to-l from-transparent to-[#C9A84C]"/>
+          </div>
+
+          {/* Scattered hearts between flowers */}
+          {[
+            { top: "18%", left: "6%",  size: "w-5 h-5",  opacity: "opacity-20", color: "#C9A84C" },
+            { top: "22%", right: "7%", size: "w-4 h-4",  opacity: "opacity-20", color: "#C9A84C" },
+            { top: "35%", left: "4%",  size: "w-3 h-3",  opacity: "opacity-15", color: "#7F1D1D" },
+            { top: "38%", right: "5%", size: "w-5 h-5",  opacity: "opacity-15", color: "#7F1D1D" },
+            { top: "50%", left: "7%",  size: "w-4 h-4",  opacity: "opacity-10", color: "#C9A84C" },
+            { top: "52%", right: "6%", size: "w-3 h-3",  opacity: "opacity-10", color: "#C9A84C" },
+            { top: "28%", left: "12%", size: "w-3 h-3",  opacity: "opacity-10", color: "#C9A84C" },
+            { top: "30%", right:"11%", size: "w-3 h-3",  opacity: "opacity-10", color: "#C9A84C" },
+          ].map((h, i) => (
+            <svg
+              key={i}
+              className={`fixed ${h.size} ${h.opacity}`}
+              style={{ top: h.top, left: (h as {left?:string}).left, right: (h as {right?:string}).right }}
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.604 3.322 2 5.5 2c1.699 0 3.296.92 4.5 2.38C11.204 2.92 12.801 2 14.5 2 16.678 2 19 3.604 19 7.191c0 4.105-5.37 8.863-11 14.402z"
+                fill={h.color}
+              />
+            </svg>
+          ))}
+
+          {/* Tiny floating petals */}
+          {[
+            { top:"42%", left:"3%"  },
+            { top:"60%", left:"5%"  },
+            { top:"45%", right:"4%" },
+            { top:"62%", right:"3%" },
+          ].map((p, i) => (
+            <svg key={i} className="fixed w-4 h-4 opacity-10"
+              style={{ top: p.top, left: (p as {left?:string}).left, right: (p as {right?:string}).right }}
+              viewBox="0 0 100 100">
+              <ellipse cx="50" cy="30" rx="14" ry="28" fill="#C9A84C" transform="rotate(15 50 50)"/>
+            </svg>
+          ))}
         </div>
 
         <motion.div
@@ -71,12 +124,11 @@ export default function Home() {
           {/* Ganesha */}
           <div className="flex justify-center mb-2">
             <Image
-              src="/ganesha.png"
+              src="/ganesha-transparent.png"
               alt="Sri Ganesha"
               width={360}
               height={360}
               className="object-contain"
-              style={{ mixBlendMode: "multiply" }}
               priority
             />
           </div>
