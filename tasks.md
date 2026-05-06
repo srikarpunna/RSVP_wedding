@@ -7,3 +7,6 @@
 - [x] Add Google Sheets submission API and environment configuration.
 - [x] Test layout responsiveness and a sample RSVP submission.
 - [x] Add looping background music with browser gesture unlock.
+- [x] Remove the Mehndi event from the RSVP flow.
+- [x] Update Pellikuthuru to groom ceremony with Sangeet address.
+- [x] Replace groom ceremony image with groom-specific background.
