@@ -5,6 +5,7 @@ import { ceremonies } from "@/lib/events";
 import RSVPForm from "@/components/RSVPForm";
 import { motion } from "framer-motion";
 import { MapPin, Clock, ChevronDown } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -25,9 +26,60 @@ function GoldDivider() {
   );
 }
 
+function BackgroundMusic() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const unlockEvents = ["click", "pointerdown", "touchstart", "keydown", "scroll"] as const;
+
+    const playAudio = async () => {
+      audio.muted = false;
+      audio.volume = 1;
+
+      try {
+        await audio.play();
+        unlockEvents.forEach((eventName) => {
+          window.removeEventListener(eventName, playAudio, true);
+        });
+      } catch {
+        // Browsers block unmuted autoplay until a real user gesture.
+      }
+    };
+
+    unlockEvents.forEach((eventName) => {
+      window.addEventListener(eventName, playAudio, true);
+    });
+
+    void playAudio();
+
+    return () => {
+      audio.pause();
+      unlockEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, playAudio, true);
+      });
+    };
+  }, []);
+
+  return (
+    <audio
+      ref={audioRef}
+      src="/background-music.mp3"
+      autoPlay
+      loop
+      playsInline
+      preload="auto"
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen text-[#2c1810]">
+      <BackgroundMusic />
 
       {/* Gold border — top */}
       <div className="w-full leading-none">

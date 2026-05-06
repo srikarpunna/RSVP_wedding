@@ -6,3 +6,4 @@
 - [x] Add form validation and polished submit/confirmation states.
 - [x] Add Google Sheets submission API and environment configuration.
 - [x] Test layout responsiveness and a sample RSVP submission.
+- [x] Add looping background music with browser gesture unlock.
